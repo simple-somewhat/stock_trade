@@ -1,0 +1,32 @@
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[project]
+name = "stock-trade"
+version = "0.1.0"
+description = "A-share data cache, screening, validation, and backtesting tools"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "akshare>=1.19,<2",
+    "duckdb>=1.2,<2",
+    "pandas>=2.2,<3",
+    "pyarrow>=18,<23",
+    "pymongo>=4.10,<5",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.3,<9",
+]
+
+[project.scripts]
+stock-trade = "stock_trade.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/stock_trade"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
